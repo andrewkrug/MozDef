@@ -117,7 +117,7 @@ if (Meteor.isServer) {
       var self = this;
       var count = 0;
       var initializing = true;
-      var recordID=Meteor.uuid();
+      var recordID=Random.id();
 
       //get a count by watching for only 1 new entry sorted in reverse date order.
       //use that hook to return a find().count rather than iterating the entire result set over and over
@@ -387,4 +387,3 @@ if (Meteor.isClient) {
     Meteor.subscribe("userActivity");
 
 };
-

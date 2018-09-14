@@ -1,9 +1,7 @@
-FROM centos:7
-
+FROM centos:7.5.1804
 LABEL maintainer="mozdef@mozilla.com"
 
-ENV NODE_VERSION 4.7.0
-ENV METEOR_VERSION 1.4.2.3
+ENV METEOR_VERSION 1.7.0.5
 
 ENV MONGO_URL=mongodb://mongodb:3002/meteor
 ENV ROOT_URL=http://localhost
@@ -23,9 +21,6 @@ RUN \
                 libstdc++ \
                 libffi-devel \
                 zlib-devel && \
-  curl -sL -o /opt/mozdef/nodesource.rpm https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm && \
-  rpm -i --nosignature --force /opt/mozdef/nodesource.rpm && \
-  yum install -y nodejs-$NODE_VERSION && \
   mkdir /opt/mozdef/meteor && \
   curl -sL -o /opt/mozdef/meteor.tar.gz https://static-meteor.netdna-ssl.com/packages-bootstrap/$METEOR_VERSION/meteor-bootstrap-os.linux.x86_64.tar.gz && \
   tar -xzf /opt/mozdef/meteor.tar.gz -C /opt/mozdef/meteor && \
@@ -34,17 +29,14 @@ RUN \
   cp /opt/mozdef/.meteor/packages/meteor-tool/*/mt-os.linux.x86_64/scripts/admin/launch-meteor /usr/bin/meteor
 
 COPY meteor /opt/mozdef/envs/mozdef/meteor
-COPY docker/compose/mozdef_meteor/files/settings.js /opt/mozdef/envs/mozdef/meteor/app/lib/settings.js
-RUN chown -R mozdef:mozdef /opt/mozdef/envs/mozdef/meteor
+COPY docker/compose/mozdef_meteor/files/settings.js /opt/mozdef/meteor/app/lib/settings.js
 
 USER mozdef
 RUN \
-  mkdir -p /opt/mozdef/envs/meteor/mozdef && \
-  cd /opt/mozdef/envs/mozdef/meteor && \
-  meteor npm install && \
-  meteor build --server localhost:3002 --directory /opt/mozdef/envs/meteor/mozdef && \
-  mv /opt/mozdef/envs/mozdef/meteor/node_modules /opt/mozdef/envs/meteor/mozdef/node_modules
+  cd /opt/mozdef/meteor && \
+  meteor npm install
 
-WORKDIR /opt/mozdef/envs/meteor/mozdef
+
+WORKDIR /opt/mozdef/mozdef
 
 EXPOSE 3000

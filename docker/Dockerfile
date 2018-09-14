@@ -4,12 +4,11 @@
 # Copyright (c) 2014 Mozilla Corporation
 #
 
-FROM centos:7
+FROM centos:7.5.1804
 
 LABEL maintainer="mozdef@mozilla.com"
 
-ENV NODE_VERSION 4.7.0
-ENV METEOR_VERSION 1.4.2.3
+ENV METEOR_VERSION 1.7.0.5
 ENV PYTHON_VERSION 2.7.11
 ENV KIBANA_VERSION 5.6.7
 ENV ES_VERSION 5.6.7
@@ -53,12 +52,7 @@ RUN \
   curl -s -L https://artifacts.elastic.co/downloads/kibana/kibana-$KIBANA_VERSION-linux-x86_64.tar.gz | tar -C /opt/mozdef/ -xz && \
   mv /opt/mozdef/kibana-$KIBANA_VERSION-linux-x86_64 /opt/mozdef/envs/kibana && \
   yum install -y mongodb-org && \
-  curl -s -L https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz  | tar -C /opt/mozdef/ -xz && \
-  cd /opt/mozdef/Python-$PYTHON_VERSION && \
-  ./configure && \
-  make && \
-  make install && \
-  rm -r /opt/mozdef/Python-$PYTHON_VERSION && \
+  yum install -y python python-devel python-pip \
   cd /opt/mozdef && \
   yum install -y mysql-devel \
                     python-devel \
@@ -66,9 +60,6 @@ RUN \
   chown -R mozdef:mozdef /opt/mozdef/ && \
   pip install virtualenv && \
   cd / && \
-  curl -sL -o /opt/mozdef/nodesource.rpm https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm && \
-  rpm -i --nosignature --force /opt/mozdef/nodesource.rpm && \
-  yum install -y nodejs-$NODE_VERSION && \
   mkdir /opt/mozdef/meteor && \
   curl -sL -o /opt/mozdef/meteor.tar.gz https://static-meteor.netdna-ssl.com/packages-bootstrap/$METEOR_VERSION/meteor-bootstrap-os.linux.x86_64.tar.gz && \
   tar -xzf /opt/mozdef/meteor.tar.gz -C /opt/mozdef/meteor && \
@@ -77,20 +68,16 @@ RUN \
   cp /opt/mozdef/.meteor/packages/meteor-tool/*/mt-os.linux.x86_64/scripts/admin/launch-meteor /usr/bin/meteor
 
 USER mozdef
-COPY meteor /opt/mozdef/envs/mozdef/meteor
-USER root
-RUN chown -R mozdef:mozdef /opt/mozdef/envs/mozdef/meteor
+COPY meteor/ /opt/mozdef/meteor
+COPY docker/conf/settings.js /opt/mozdef/meteor/app/lib/settings.js
 
-COPY docker/conf/settings.js /opt/mozdef/envs/mozdef/meteor/app/lib/settings.js
-RUN chown -R mozdef:mozdef /opt/mozdef/envs/mozdef/meteor/app/lib/settings.js
+USER root
+RUN chown -R mozdef:mozdef /opt/mozdef/meteor
 
 USER mozdef
 RUN \
-  mkdir -p /opt/mozdef/envs/meteor/mozdef && \
-  cd /opt/mozdef/envs/mozdef/meteor && \
-  meteor npm install && \
-  meteor build --server localhost:3002 --directory /opt/mozdef/envs/meteor/mozdef/ && \
-  mv /opt/mozdef/envs/mozdef/meteor/node_modules /opt/mozdef/envs/meteor/mozdef/node_modules
+  cd /opt/mozdef/meteor && \
+  meteor npm install
 
 # Create python virtual environment and install dependencies
 COPY requirements.txt /opt/mozdef/envs/mozdef/requirements.txt
@@ -121,8 +108,14 @@ COPY mq /opt/mozdef/envs/mozdef/mq
 COPY docker/conf/loginput_index.conf /opt/mozdef/envs/mozdef/loginput/index.conf
 COPY docker/conf/rest_index.conf /opt/mozdef/envs/mozdef/rest/index.conf
 
+# Patch the single container to prefer localhost
+RUN echo -n 'mongohost=localhost' >> /opt/mozdef/envs/mozdef/rest/index.conf
+
 COPY docker/conf/config.py /opt/mozdef/envs/mozdef/alerts/lib/config.py
 COPY docker/conf/cron_entries.txt /cron_entries.txt
+
+# Add examples to single build image for mocking.
+COPY examples /opt/mozdef/examples
 
 USER mozdef
 RUN crontab /cron_entries.txt

@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:7.5.1804
 
 LABEL maintainer="mozdef@mozilla.com"
 
@@ -17,12 +17,7 @@ RUN \
                   make && \
   useradd -ms /bin/bash -d /opt/mozdef -m mozdef && \
   mkdir /opt/mozdef/envs && \
-  curl -s -L https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz  | tar -C /opt/mozdef/ -xz && \
-  cd /opt/mozdef/Python-$PYTHON_VERSION && \
-  ./configure && \
-  make && \
-  make install && \
-  rm -r /opt/mozdef/Python-$PYTHON_VERSION && \
+  yum install -y python python-devel python-pip \
   cd /opt/mozdef && \
   yum install -y mysql-devel \
                     python-devel \
@@ -38,6 +33,9 @@ COPY requirements.txt /opt/mozdef/envs/mozdef/requirements.txt
 COPY cron/update_geolite_db.py /opt/mozdef/envs/mozdef/cron/update_geolite_db.py
 COPY cron/update_geolite_db.conf /opt/mozdef/envs/mozdef/cron/update_geolite_db.conf
 COPY cron/update_geolite_db.sh /opt/mozdef/envs/mozdef/cron/update_geolite_db.sh
+
+# Add event generators
+COPY examples /opt/mozdef/examples
 
 USER mozdef
 RUN \
