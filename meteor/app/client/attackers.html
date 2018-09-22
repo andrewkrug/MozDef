@@ -79,6 +79,24 @@ sidenav
     transition: all 400ms ease;
 }
 
+sidenav h5,
+sidenav label
+{
+    text-transform: uppercase;
+    color: #FFF;
+}
+
+.attackers-wrapper {
+    background: rgb(32,87,153); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(32,124,202,1) 43%, rgba(41,137,216,1) 62%, rgba(41,150,217,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(43%,rgba(32,124,202,1)), color-stop(62%,rgba(41,137,216,1)), color-stop(100%,rgba(41,150,217,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* W3C */
+    background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* W3C */
+}
+
 </style>
 <!-- menu -->
 <sidenav>
@@ -115,18 +133,18 @@ sidenav
     </div>
     <div class="col-md-6 filters-col">
           <div class="row">
-            <div id="ringChart-category" class="text-center"><h5 class="upperwhite" id="Categories">Categories:</h5></div>
+            <div id="ringChart-category" class="text-center"><h5 id="Categories">Categories:</h5></div>
         </div>
         <div class="row">
-            <div id="ringChart-lastseen" class="text-center"><h5 class="upperwhite" id="LastSeen">Last Seen:</h5></div>
+            <div id="ringChart-lastseen" class="text-center"><h5 id="LastSeen">Last Seen:</h5></div>
         </div>
     </div>
     <div class="col-md-6 filters-col">
         <div class="row">
-            <div id="ringChart-country" class="text-center"><h5 class="upperwhite" id="Countries">Country:</h5></div>
+            <div id="ringChart-country" class="text-center"><h5 id="Countries">Country:</h5></div>
         </div>
         <div class="row">
-            <div id="ringChart-ip" class="text-center"><h5 class="upperwhite" id="IPs">IP Address:</h5></div>
+            <div id="ringChart-ip" class="text-center"><h5 id="IPs">IP Address:</h5></div>
         </div>
     </div>
 </sidenav>

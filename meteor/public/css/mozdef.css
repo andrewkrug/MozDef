@@ -5,52 +5,14 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 Copyright (c) 2014 Mozilla Corporation
 */
 
-/*base css */
-html{
-	background: none;
-	min-height: 100%;
-}
-
-body{
-	/*gradient*/
-
-    background: rgb(32,87,153); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(32,124,202,1) 43%, rgba(41,137,216,1) 62%, rgba(41,150,217,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(43%,rgba(32,124,202,1)), color-stop(62%,rgba(41,137,216,1)), color-stop(100%,rgba(41,150,217,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* IE10+ */
-    background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* W3C */
-    background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 43%,rgba(41,137,216,1) 62%,rgba(41,150,217,1) 100%); /* W3C */
-    font-size: 14px;
-    /*margin: 0;*/
-    /*min-width: 990px;*/
-    padding: 0;
-    color: #000;
-    line-height: normal;
-    text-align: left;
-}
-
 
 /*mozdef custom */
 .upperwhite {
-    color: #FFF;
     text-transform: uppercase;
-}
-
-caption, legend {
-    color: #FFF;
 }
 
 .shadow {
     text-shadow: #000 .7px .7px .7px;
-}
-
-.ipaddress {
-  color: #FFF;
-  font-style: normal;
-  font-weight: normal;
-
 }
 
 .headercontainer {
@@ -63,7 +25,7 @@ caption, legend {
     position: relative;
     float: right;
     display: block;
-    height: 40px;
+    height: 38px;
     width: 100px;
     overflow: visible;
 }
@@ -135,7 +97,7 @@ caption, legend {
 }
 
 .attackercallout .blockip{
-    color: #FFF;
+    color: #fff;
     text-transform: uppercase;
     margin-top: 20px;
 }
@@ -188,26 +150,14 @@ caption, legend {
     color: var(--alert-color);
     background-color: var(--alert-bg-color);
     text-transform: uppercase;
-    display: table-cell;
     font-weight: bold;
   }
-
-.alert-row a{
-    color: wheat;
-}
 
 /*bootstrap overrides*/
 
 .btn {
   border: 1px outset;
-  border-radius: 4px;
 }
-
-
-input[type="search"] {
-  border-radius: 15px;
-}
-
 
 [class*="span"].centerspan {
     margin: 0 auto;
@@ -218,21 +168,6 @@ input[type="search"] {
     margin: 0 auto;
     float: none;
 }
-
-.table-striped tbody > tr:nth-child(odd) > td,
-.table-striped tbody > tr:nth-child(odd) > th {
-  background-color: rgba(30,87,153,.7);
-}
-
-.table-hover tbody tr:hover > td,
-.table-hover tbody tr:hover > th {
-  background-color: rgba(30,87,153,.5);
-}
-
-td{
-  color:white;
-}
-
 
 .welcome {
     text-align: center;
@@ -307,11 +242,11 @@ circle:hover{
 }
 
 #header a.mozdef{
-    color:white;
-    text-shadow: #000 5px 3px 3px;
+    text-shadow: rgba(0,0,0,0.6) 1px 2px 3px;
     text-align: center;
     font-size: large;
     margin-top: -.25em;
+    font-weight: bolder;
 }
 
 .mozillalogo{
@@ -330,7 +265,7 @@ circle:hover{
     font-weight: bolder;
     text-transform: uppercase;
     display: inline-block;
-    height: 40px;
+    height: 38px;
     line-height: normal;
 }
 
@@ -356,8 +291,7 @@ circle:hover{
 #nav-main li a:link,
 #nav-main li a:visited,
 #nav-main li span {
-    border-color: #3a3c46;
-    color: #fff;
+    border-color: #b5b8c8;
     padding: 8px 10px 10px 10px;
     height: 25px;
     display: block;
@@ -392,18 +326,9 @@ circle:hover{
 #nav-main li.hover a,
 #nav-main li.hover a:link,
 #nav-main li.hover a:visited {
-    box-shadow:
-        rgba(41,48,54,0.2) 0 0px 0px,
-        inset rgba(0,0,0,0.3) 0 -6px 20px 10px;
-    -moz-box-shadow:
-        rgba(41,48,54,0.2) 0 0px 0px,
-        inset rgba(0,0,0,0.3) 0 -6px 20px 10px;
-    -webkit-box-shadow:
-        rgba(41,48,54,0.2) 0 0px 0px,
-        inset rgba(0,0,0,0.3) 0 -6px 20px 10px;
-    background: #000;
-    background: rgba(0,0,0,0);
-
+    box-shadow: inset rgba(0,0,0,0.1) 0 -6px 20px 0;
+    -moz-box-shadow: inset rgba(0,0,0,0.1) 0 -6px 20px 0;
+    -webkit-box-shadow: inset rgba(0,0,0,0.1) 0 -6px 20px 0;
     transition-duration: 0.1s;
     transition-timing-function: linear;
     transition-delay: 0s;
@@ -416,7 +341,7 @@ circle:hover{
 
 #nav-main li:hover ul,
 .js #nav-main li.hover ul {
-    margin-top: 2.5em;
+    margin-top: 38px;
     left: 0;
     opacity: 1;
     -moz-transition: opacity 0.2s ease-in-out;
@@ -441,39 +366,20 @@ circle:hover{
     opacity: 0;
     z-index: 99;
     width: 190px;
-    border-radius: 0px 4px 4px;
-    border: 1px solid #3a3c46;
-    text-shadow: 1px 1px 0 #000, 0 0 5px #000;
-    background: #000;
-    background: rgba(0,0,0,0.9);
-    box-shadow:
-        rgba(41,48,54,0.2) 0 2px 0px,
-        inset rgba(41,48,54,0.3) 0 -2px 0;
-    -moz-box-shadow:
-        rgba(41,48,54,0.2) 0 2px 0px,
-        inset rgba(41,48,54,0.3) 0 -2px 0;
-    -webkit-box-shadow:
-        rgba(41,48,54,0.2) 0 2px 0px,
-        inset rgba(41,48,54,0.3) 0 -2px 0;
+    border: 1px solid #b5b8c8;
 }
 
 #nav-main ul ul li {
     height: auto;
     float: none;
     border: 0px none;
-    box-shadow:
-        inset rgba(41,48,54,0.2) 0 -1px 0 0;
-    -moz-box-shadow:
-        inset rgba(41,48,54,0.2) 0 -1px 0 0;
-    -webkit-box-shadow:
-        inset rgba(41,48,54,0.2) 0 -1px 0 0;
 }
 
 #nav-main ul ul a,
 #nav-main ul ul a:link,
 #nav-main ul ul a:visited {
     overflow: hidden;
-    padding: 3px 10px;
+    padding: 4px 10px;
     margin: 0px;
     height: auto;
     float: none;
@@ -481,7 +387,7 @@ circle:hover{
     font-size: 10px;
     border: 0px none;
     position: relative;
-    background: none repeat scroll 0% 0% transparent;
+    background: #FFF;
     box-shadow: none;
 }
 
@@ -493,17 +399,9 @@ circle:hover{
 #nav-main ul li.current ul li a:focus,
 #nav-main ul li.current ul li a:active,
 .js #nav-main ul li.current ul li a:focus {
-    background: rgb(227,235,244);
-    background: rgba(41,48,54,0.2);
-    box-shadow:
-        inset rgba(41,48,54,0.3) 0 2px 0px,
-        0 0 3px 2px rgba(41,48,54,.2) inset;
-    -moz-box-shadow:
-        inset rgba(41,48,54,0.3) 0 2px 0px,
-        0 0 3px 2px rgba(41,48,54,.2) inset;
-    -webkit-box-shadow:
-        inset rgba(41,48,54,0.3) 0 2px 0px,
-        0 0 3px 2px rgba(41,48,54,.2) inset;
+    box-shadow: inset rgba(0,0,0,0.1) 0 0 20px 0;
+    -moz-box-shadow: inset rgba(0,0,0,0.1) 0 0 20px 0;
+    -webkit-box-shadow: inset rgba(0,0,0,0.1) 0 0 20px 0;
 }
 
 
