@@ -9,11 +9,10 @@ Copyright (c) 2017 Mozilla Corporation
 
 mozdef = {
   rootURL: "http://localhost",
-  port: "443",
-  rootAPI: "https://localhost:8444",
-  kibanaURL: "https://localhost:9443/app/kibana#",
-  enableBlockIP: true,
+  port: "80",
+  rootAPI: "http://rest:8081",
+  kibanaURL: "http://localhost:9090/app/kibana#",
+  enableBlockIP: false,
   enableClientAccountCreation: true,
   authenticationType: "meteor-password"
 }
-
