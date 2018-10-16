@@ -8,7 +8,7 @@ Parameters:
     Default: 100
     Description: "The size of the Elastic Block Store to have back ElasticSearch, in GigaBytes."
 Resources:
-   # Not currently supported by cloudformation.
+#  Not currently supported by cloudformation.
 #  ESServiceLinkedRole:
 #    Type: "AWS::IAM::ServiceLinkedRole"
 #    Properties:
@@ -18,7 +18,7 @@ Resources:
     Type: "AWS::Elasticsearch::Domain"
     Properties:
       VPCOptions:
-        SubnetIds: !Ref SubnetIds 
+        SubnetIds: !Ref SubnetIds
       EBSOptions:
         EBSEnabled: true
         VolumeType: "gp2"
@@ -39,4 +39,3 @@ Outputs:
     Value: !GetAtt MozDefElasticSearch.DomainEndpoint
     Export:
       Name: "ElasticsearchDomainEndpoint"
-
